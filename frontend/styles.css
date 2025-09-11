@@ -1,0 +1,26 @@
+:root{
+	--bg: #f4f7f9;
+	--card: #ffffff;
+	--accent: #2b7cff;
+	--muted: #6b7280;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:#111;margin:0;padding:24px}
+.container{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+h1{grid-column:1/-1;margin:0 0 8px}
+.form-section,.table-section{background:var(--card);padding:16px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+form label{display:block;margin-bottom:8px;font-size:14px}
+form input[type=text],form input[type=number]{width:100%;padding:8px;border:1px solid #e5e7eb;border-radius:4px}
+.checkbox{display:flex;align-items:center;gap:8px}
+.actions{display:flex;gap:8px;margin-top:8px}
+button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
+button.secondary{background:#e5e7eb;color:#111}
+table{width:100%;border-collapse:collapse}
+thead th{text-align:left;padding:8px;border-bottom:1px solid #eef2f7}
+tbody td{padding:8px;border-bottom:1px solid #f3f4f6}
+.actions-cell button{margin-right:6px}
+
+@media (max-width:800px){
+	.container{grid-template-columns:1fr}
+}
+
