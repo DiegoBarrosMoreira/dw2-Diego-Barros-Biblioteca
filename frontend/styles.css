@@ -15,6 +15,9 @@ form input[type=text],form input[type=number]{width:100%;padding:8px;border:1px 
 .actions{display:flex;gap:8px;margin-top:8px}
 button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
 button.secondary{background:#e5e7eb;color:#111}
+#status{grid-column:1/-1;padding:8px;border-radius:6px;margin-bottom:8px}
+#status.ok{background:#ecfdf5;color:#065f46}
+#status.error{background:#fff1f2;color:#7f1d1d}
 table{width:100%;border-collapse:collapse}
 thead th{text-align:left;padding:8px;border-bottom:1px solid #eef2f7}
 tbody td{padding:8px;border-bottom:1px solid #f3f4f6}

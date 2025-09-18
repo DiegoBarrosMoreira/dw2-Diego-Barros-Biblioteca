@@ -5,10 +5,20 @@ const tabelaBody = document.querySelector('#livros-table tbody');
 const formTitle = document.getElementById('form-title');
 const cancelBtn = document.getElementById('cancel-btn');
 
+const statusEl = document.getElementById('status');
+
 async function fetchLivros(){
-	const res = await fetch(`${API}/livros`);
-	const data = await res.json();
-	renderTabela(data);
+	try{
+		const res = await fetch(`${API}/livros`);
+		if(!res.ok) throw new Error(`HTTP ${res.status}`);
+		const data = await res.json();
+		renderTabela(data);
+		setStatus('Conectado', 'ok');
+	}catch(err){
+		renderTabela([]);
+		setStatus('Erro de conexão: ' + err.message, 'error');
+		console.error(err);
+	}
 }
 
 function renderTabela(livros){
@@ -70,16 +80,28 @@ form.addEventListener('submit', async (ev) =>{
 		ano_publicacao: Number(document.getElementById('ano_publicacao').value),
 		disponivel: document.getElementById('disponivel').checked,
 	};
-
-	if(id){
-		await fetch(`${API}/livros/${id}`, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-	} else {
-		await fetch(`${API}/livros`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+	try{
+		let res;
+		if(id){
+			res = await fetch(`${API}/livros/${id}`, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+		} else {
+			res = await fetch(`${API}/livros`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+		}
+		if(!res.ok) throw new Error(`HTTP ${res.status}`);
+		resetForm();
+		fetchLivros();
+		setStatus('Livro salvo com sucesso', 'ok');
+	}catch(err){
+		setStatus('Erro ao salvar: ' + err.message, 'error');
+		console.error(err);
 	}
-
-	resetForm();
-	fetchLivros();
 });
+
+function setStatus(msg, kind){
+	if(!statusEl) return;
+	statusEl.textContent = msg;
+	statusEl.className = 'status ' + (kind||'');
+}
 
 cancelBtn.addEventListener('click', () => { resetForm(); });
 
