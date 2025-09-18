@@ -21,23 +21,24 @@ async function fetchLivros(){
 	}
 }
 
+
 function renderTabela(livros){
-	tabelaBody.innerHTML = '';
-	livros.forEach(l => {
-		const tr = document.createElement('tr');
-		tr.innerHTML = `
-			<td>${l.id}</td>
-			<td>${escapeHtml(l.titulo)}</td>
-			<td>${escapeHtml(l.autor)}</td>
-			<td>${l.ano_publicacao}</td>
-			<td>${l.disponivel ? 'Sim' : 'Não'}</td>
-			<td class="actions-cell">
-				<button data-id="${l.id}" class="edit">Editar</button>
-				<button data-id="${l.id}" class="delete">Excluir</button>
-			</td>
-		`;
-		tabelaBody.appendChild(tr);
-	});
+	 tabelaBody.innerHTML = '';
+	 livros.forEach((l, idx) => {
+		 const tr = document.createElement('tr');
+		 tr.innerHTML = `
+			 <td>${idx + 1}</td>
+			 <td>${escapeHtml(l.titulo)}</td>
+			 <td>${escapeHtml(l.autor)}</td>
+			 <td>${l.ano_publicacao}</td>
+			 <td>${l.disponivel ? 'Sim' : 'Não'}</td>
+			 <td class="actions-cell">
+				 <button data-id="${l.id}" class="edit">Editar</button>
+				 <button data-id="${l.id}" class="delete">Excluir</button>
+			 </td>
+		 `;
+		 tabelaBody.appendChild(tr);
+	 });
 
 	tabelaBody.querySelectorAll('.edit').forEach(btn => btn.addEventListener('click', onEdit));
 	tabelaBody.querySelectorAll('.delete').forEach(btn => btn.addEventListener('click', onDelete));
