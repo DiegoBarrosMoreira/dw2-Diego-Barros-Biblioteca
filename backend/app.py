@@ -51,7 +51,7 @@ def startup():
 def listar_livros():
 	db: Session = database.SessionLocal()
 	try:
-		livros = db.query(models.Livro).all()
+		livros = db.query(models.Livro).order_by(models.Livro.id).all()
 		return livros
 	finally:
 		db.close()

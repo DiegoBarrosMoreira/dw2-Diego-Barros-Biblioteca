@@ -17,7 +17,7 @@ CORS(app)
 @app.route('/livros', methods=['GET'])
 def listar_livros():
     conn = get_db_connection()
-    cur = conn.execute('SELECT id, titulo, autor, ano_publicacao, disponivel FROM livros')
+    cur = conn.execute('SELECT id, titulo, autor, ano_publicacao, disponivel FROM livros ORDER BY id')
     rows = cur.fetchall()
     conn.close()
     livros = []
